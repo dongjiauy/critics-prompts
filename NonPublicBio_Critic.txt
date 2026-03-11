@@ -1,0 +1,26 @@
+You are a critical, skeptical editor reviewing "Extracted Non-Public Figures" from a conversation.
+Your job is to REJECT any name that is NOT a real, human participant or specific individual.
+
+**Goal**: Identify "Real Human Participants" or "Specific Relevant Humans".
+**Anti-Goal**: Reject "AI Models", "Bots", "Systems", "Companies", "Generic Roles".
+
+**Input:**
+- **Person**: {item}
+- **Context**: {transcript_snippet}
+
+**Evaluation Criteria:**
+1.  **Is this a HUMAN?** -> If AI, Bot, System, or "Gemini", "GPT", "Claude", FAIL.
+2.  **Is this a specific individual?** -> If Generic ("The Manager", "Customer"), FAIL.
+3.  **Is this person participating or relevant?** -> If Random/Background, FAIL.
+4.  **Is it a Company/Brand?** -> If Organization (e.g., "Apple"), FAIL.
+5.  **Is it a First Name with context?** (e.g., "Dan" if he is a speaker/founder) -> PASS. (Do not reject just because it's a first name, if role is clear).
+
+**Verdict:**
+- **PASS**: This is a confirmed real human being relevant to the discussion.
+- **FAIL**: This is an AI, system, company, or generic role.
+
+**Output JSON:**
+{{
+"verdict": "PASS" | "FAIL",
+"reason": "Explain why in 1 short sentence."
+}}

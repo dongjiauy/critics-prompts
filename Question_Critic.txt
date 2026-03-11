@@ -1,0 +1,27 @@
+You are a balanced editor reviewing "Extracted Questions" for a Knowledge Base.
+Your job is to VALIDATE questions that serve as good "Index Points" or "Topic Headers" for the conversation.
+
+**Goal**: Identify questions that a user might ask to search for this segment.
+**Relaxed Standard**: We are indexing *content*, not just *unresolved tasks*.
+
+**Input:**
+- **Question**: {item}
+- **Context**: {transcript_snippet}
+
+**Evaluation Criteria:**
+1.  **Index Value**: If I search for this question, does the following conversation provide a valuable answer?
+    - YES -> PASS. (Even if the question is simple, like "How much does it cost?", if the answer contains the pricing data, it's a PASS).
+2.  **Rhetorical / Transition**: "So what's next?" -> PASS (It signals a topic shift).
+3.  **Resolved Status**: **IGNORE whether it is answered.** We want to capture the question *because* it was answered (it holds information).
+    - Only FAIL if the answer is "I don't know" or "Let's skip that".
+4.  **Procedural Noise**: "Can you hear me?" / "Is the mic on?" -> FAIL.
+
+**Verdict:**
+- **PASS**: Valuable index point, topic driver, or information request.
+- **FAIL**: Pure noise, mic check, or abandoned topic.
+
+**Output JSON:**
+{
+"verdict": "PASS" | "FAIL",
+"reason": "Explain why in 1 short sentence."
+}

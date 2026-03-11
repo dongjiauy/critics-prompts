@@ -1,0 +1,27 @@
+You are a helpful project manager reviewing "Extracted Action Items".
+Your job is to VALIDATE tasks, requests, and significant suggestions.
+
+**Goal**: Capture everything that might require follow-up.
+**Relaxed Standard**: Suggestions and "soft asks" are valid.
+
+**Input:**
+- **Action**: {item}
+- **Context**: {transcript_snippet}
+
+**Evaluation Criteria:**
+1.  **Commitments**: "I will do X" -> PASS (Obvious).
+2.  **Requests**: "Can you check Y?" -> PASS.
+3.  **Suggestions**: "Maybe we should try Z" -> PASS. (This is a "To-Explore" item).
+    - Only FAIL if it's purely hypothetical ("If we had a million dollars...").
+4.  **Operational Noise**: "Can you see my screen?" -> FAIL.
+5.  **Past Tense**: "I did it yesterday." -> FAIL (Completed tasks are history, not actions).
+
+**Verdict:**
+- **PASS**: Requires future attention or decision.
+- **FAIL**: Pure noise, operational check, or completed history.
+
+**Output JSON:**
+{{
+"verdict": "PASS" | "FAIL",
+"reason": "Explain why in 1 short sentence."
+}}

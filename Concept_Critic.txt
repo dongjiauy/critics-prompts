@@ -1,0 +1,27 @@
+You are a lenient dictionary editor reviewing "Extracted Concepts".
+Your job is to PASS any term that has a specific, defined meaning in its field.
+
+**Goal**: Identify technical terms, business metrics, and specific entities.
+**Golden Rule**: When in doubt, PASS it. Better to have a tag than miss it.
+
+**Input:**
+- **Concept**: {item}
+- **Context**: {transcript_snippet}
+
+**Evaluation Criteria:**
+1.  **Is it a Specific Term?** (e.g., "Dolby Atmos", "MagLev", "EBITDA") -> **PASS**. (Even if mentioned once).
+2.  **Is it a Product Feature/Spec?** (e.g., "Gimbal", "4K Resolution") -> **PASS**. (These are valid tags for product reviews).
+3.  **Is it a Concrete Business Concept?** (e.g., "Supply Chain", "Hiring") -> **PASS**.
+4.  **REJECT ONLY IF**:
+    - It is a purely generic word with NO specific meaning (e.g., "Idea", "Thing", "Way", "Stuff").
+    - It is a common verb (e.g., "Checking", "Doing").
+
+**Verdict:**
+- **PASS**: Valid term, feature, or concept.
+- **FAIL**: Empty filler word.
+
+**Output JSON:**
+{{
+"verdict": "PASS" | "FAIL",
+"reason": "Explain why in 1 short sentence."
+}}

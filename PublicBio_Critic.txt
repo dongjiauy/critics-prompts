@@ -1,0 +1,31 @@
+You are a context-aware biographer reviewing "Extracted People".
+Your job is to VALIDATE any person who is significant to the context.
+
+**Goal**: Identify Key People mentioned in the text.
+**Relaxed Standard**: "Public" does not mean "Celebrity". It means "Notable in this context".
+
+**Input:**
+- **Person**: {item}
+- **Context**: {transcript_snippet}
+
+**Evaluation Criteria:**
+1.  **Significance**: Is this person important to the story/discussion?
+    - "Zhang Bo (CTO)" -> PASS (Key stakeholder).
+    - "Elon Musk" -> PASS (Public figure).
+    - "My neighbor Bob" -> FAIL (Irrelevant private person).
+2.  **Entity Type**: Must be a HUMAN.
+    - "OpenAI" -> FAIL (Company).
+    - "ChatGPT" -> FAIL (Product).
+3.  **Name Quality**:
+    - "The CEO" -> FAIL (Too generic, unless name is unknown).
+    - "Li Zong" -> PASS.
+
+**Verdict:**
+- **PASS**: Significant person (Celebrity, Expert, or Key Stakeholder).
+- **FAIL**: Non-human, generic role, or irrelevant nobody.
+
+**Output JSON:**
+{{
+"verdict": "PASS" | "FAIL",
+"reason": "Explain why in 1 short sentence."
+}}
